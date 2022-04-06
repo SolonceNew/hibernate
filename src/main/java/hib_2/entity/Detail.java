@@ -16,7 +16,7 @@ public class Detail {
     @Column(name = "email")
     private String email;
     @OneToOne(mappedBy = "empDetail",
-    cascade = CascadeType.ALL)
+    cascade = {CascadeType.PERSIST, CascadeType.REFRESH}) // удаляем только детали
     private Employee employee;
 
 

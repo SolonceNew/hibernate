@@ -18,17 +18,17 @@ public class App2 {
        try {
 
            session = factory.getCurrentSession();
-           Employee emp = new Employee("Nik", "Ivanov", "HR", 850);
-           Detail detail = new Detail("NY", "789-878", "Nik@mail.ru");
-           emp.setEmpDetail(detail);
-           detail.setEmployee(emp);
-           session.beginTransaction();
-           session.save(detail);
 
+           session.beginTransaction();
+           //удаляем только детали о работнике из таблицы
+           Detail detail = session.get(Detail.class, 3);
+           //разрушаем связь между эплои и деталями
+           detail.getEmployee().setEmpDetail(null);
+           session.delete(detail);
            session.getTransaction().commit();
        } finally {
-           factory.close();
            session.close();
+           factory.close();
        }
 
     }
