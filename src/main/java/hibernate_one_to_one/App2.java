@@ -1,12 +1,12 @@
-package hib_2;
+package hibernate_one_to_one;
 
-import hib_2.entity.Detail;
-import hib_2.entity.Employee;
+import hibernate_one_to_one.entity.Detail;
+import hibernate_one_to_one.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class App {
+public class App2 {
     public static void main( String[] args ) {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
@@ -18,19 +18,17 @@ public class App {
        try {
 
            session = factory.getCurrentSession();
-//           Employee emp = new Employee("Anna", "Fabrichnaya", "IT", 500);
-//           Detail detail = new Detail("Moscow", "678-278", "fabrichnaya@mail.ru");
-//           emp.setEmpDetail(detail);
-//           session.beginTransaction();
-//           session.save(emp);
-//           session.getTransaction().commit();
+
            session.beginTransaction();
-           Employee emp = session.get(Employee.class, 1);
-           session.delete(emp);
+           //удаляем только детали о работнике из таблицы
+           Detail detail = session.get(Detail.class, 3);
+           //разрушаем связь между эплои и деталями
+           detail.getEmployee().setEmpDetail(null);
+           session.delete(detail);
            session.getTransaction().commit();
        } finally {
-           factory.close();
            session.close();
+           factory.close();
        }
 
     }
