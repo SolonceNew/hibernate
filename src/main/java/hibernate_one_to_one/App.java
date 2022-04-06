@@ -18,15 +18,15 @@ public class App {
        try {
 
            session = factory.getCurrentSession();
-//           Employee emp = new Employee("Anna", "Fabrichnaya", "IT", 500);
+           Employee emp = new Employee("Anna", "Fabrichnaya", "IT", 500);
 //           Detail detail = new Detail("Moscow", "678-278", "fabrichnaya@mail.ru");
 //           emp.setEmpDetail(detail);
 //           session.beginTransaction();
 //           session.save(emp);
 //           session.getTransaction().commit();
-           session.beginTransaction();
-           Employee emp = session.get(Employee.class, 1);
-           session.delete(emp);
+//           session.beginTransaction();
+//           Employee emp = session.get(Employee.class, 1);
+//           session.delete(emp);
            session.getTransaction().commit();
        } finally {
            factory.close();

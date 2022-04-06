@@ -18,17 +18,19 @@ public class App {
         Session session = null;
        try {
 
-          // session = factory.getCurrentSession();
-           // создание департамента и 2-х работников департамента
-           //Department dep = new Department("IT", 1200, 800);
-           //Employee employee = new Employee("Anna", "Fabrichnaya", 1000);
-           //Employee employee2 = new Employee("Nina", "Smirnova", 800);
-           //dep.addEmployeeToDepartment(employee);
-           //dep.addEmployeeToDepartment(employee2);
-           //session.beginTransaction();
-           //session.save(dep);
+          session = factory.getCurrentSession();
+          // создание департамента и 2-х работников департамента
+           Department dep = new Department("Sales", 1200, 800);
+           Employee employee1 = new Employee("Anna", "Fabrichnaya", 1000);
+           Employee employee2 = new Employee("Nina", "Smirnova", 800);
+           Employee employee3 = new Employee("Andrey", "Ivanov", 900);
+           dep.addEmployeeToDepartment(employee1);
+           dep.addEmployeeToDepartment(employee2);
+           dep.addEmployeeToDepartment(employee3);
+           session.beginTransaction();
+           session.save(dep);
 
-           //получение всех работников департамента
+           //получение информации при eager
 //           session = factory.getCurrentSession();
 //           session.beginTransaction();
 //           Department dep = session.get(Department.class, 1);
@@ -36,11 +38,11 @@ public class App {
 //           System.out.println(dep.getEmps());
 
            //получение информации о конкретном работнике
-           session = factory.getCurrentSession();
-           session.beginTransaction();
-           Employee emp = session.get(Employee.class, 1);
-           System.out.println(emp);
-           System.out.println(emp.getDepartment());
+//           session = factory.getCurrentSession();
+//           session.beginTransaction();
+//           Employee emp = session.get(Employee.class, 1);
+//           System.out.println(emp);
+//           System.out.println(emp.getDepartment());
            session.getTransaction().commit();
            //чтобы при удалении работника не удалялись другие работники
            //нужно в классах энтити убрать каскад all и заменить на persist,
